@@ -2,8 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav, Form, Row, Col, Button } from 'react-bootstrap';
+import {useState} from "react";
 
 function App() {
+    const [title, setTitle] = useState("");
+    const [author, setAuthor] = useState("");
+
+    console.log(title);
+    console.log(author);
+
+
     return (
         <>
             <Navbar>
@@ -21,13 +29,15 @@ function App() {
                         <Form.Label>Book Name</Form.Label>
                         <Form.Control
                             type = "text"
-                            id="name"
+                            id="title"
+                            onChange={(e) => setTitle(e.target.value)}
                         />
                         <h3>Add Book For Supabase Database</h3>
                         <Form.Label>Book Description</Form.Label>
                         <Form.Control
                             type = "text"
-                            id="description"
+                            id="author"
+                            onChange={(e) => setAuthor(e.target.value)}
                         />
                         <br></br>
                             <Button>Add Book</Button>
