@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 import { supabase } from "./supabaseClient";
+import { Alert } from 'react-bootstrap';
 
 
 function CreateBook() {
@@ -13,8 +14,26 @@ function CreateBook() {
     const [format, setFormat] = useState("");
     const [personalNotes, setPersonalNotes] = useState("");
 
-    console.log(title);
-    console.log(author);
+    const [insertSuccess, setInsertSuccess] = useState(false);
+    const [message, setMessage] = useState('');
+    const [alertVariant, setAlertVariant] = useState("success"); // Default to success
+
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
+
+    const resetForm = () => {
+        setTitle("");
+        setAuthor("");
+        setGenre("");
+        setDescription("");
+        setDatePurchased("");
+        setDateFinishedReading("");
+        setFormat("");
+        setPersonalNotes("");
+
+        console.log('resetForm called')
+    };
 
     const addNewBook = async () => {
         try {
@@ -32,13 +51,39 @@ function CreateBook() {
                 })
                 .single();
             if (error) throw error;
+            setInsertSuccess(true);
+            resetForm();
+            setMessage('Book added successfully.');
+
+            setAlertVariant("success");
+            scrollToTop();
+
+            setTimeout(() => {
+                setInsertSuccess(false);
+            }, 3000);
         } catch (error) {
             console.log("This is the error:" + error.message);
+            setMessage('An error occurred while adding the book.');
+            setAlertVariant("danger");
+            scrollToTop();
+            console.error('Error:', error);
         }
     };
 
     return (
         <Container>
+            {insertSuccess && (
+                <Alert variant={alertVariant}>
+                    {message}
+                </Alert>
+            )}
+
+            {!insertSuccess && message && (
+                <Alert variant={alertVariant}>
+                    {message}
+                </Alert>
+            )}
+
             <Row>
                 <Col xs={12} md={8}>
                     <h3>Add Book For Supabase Database</h3>
@@ -46,24 +91,28 @@ function CreateBook() {
                     <Form.Control
                         type = "text"
                         id="title"
+                        value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
                     <Form.Label>Author</Form.Label>
                     <Form.Control
                         type = "text"
                         id="author"
+                        value={author}
                         onChange={(e) => setAuthor(e.target.value)}
                     />
                     <Form.Label>Genre</Form.Label>
                     <Form.Control
                         type = "text"
                         id="genre"
+                        value={genre}
                         onChange={(e) => setGenre(e.target.value)}
                     />
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         as = "textarea"
                         id="description"
+                        value={description}
                         rows={3}
                         onChange={(e) => setDescription(e.target.value)}
                     />
@@ -71,18 +120,21 @@ function CreateBook() {
                     <Form.Control
                         type = "date"
                         id="datePurchased"
+                        value={datePurchased}
                         onChange={(e) => setDatePurchased(e.target.value)}
                     />
                     <Form.Label>Date Finished Reading</Form.Label>
                     <Form.Control
                         type = "date"
                         id="dateFinishedReading"
+                        value={dateFinishedReading}
                         onChange={(e) => setDateFinishedReading(e.target.value)}
                     />
                     <Form.Label>Personal Notes</Form.Label>
                     <Form.Control
                         as = "textarea"
-                        id="format"
+                        id="personalNotes"
+                        value={personalNotes}
                         rows={3}
                         onChange={(e) => setPersonalNotes(e.target.value)}
                     />
@@ -101,10 +153,7 @@ function CreateBook() {
                     <Button onClick={ () => addNewBook() }>Add Book</Button>
                 </Col>
             </Row>
-            <hr></hr>
-            <Row xs={1} lg={3} className="g-4">
 
-            </Row>
         </Container>
 
     );
