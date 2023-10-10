@@ -36,37 +36,52 @@ function CreateBook() {
     };
 
     const addNewBook = async () => {
-        try {
-            const { data, error } = await supabase
-                .from("readbooks")
-                .insert({
-                    title,
-                    author,
-                    genre,
-                    description,
-                    date_purchased: datePurchased,
-                    date_finished_reading: dateFinishedReading,
-                    format_options: format,
-                    personal_notes: personalNotes
-                })
-                .single();
-            if (error) throw error;
-            setInsertSuccess(true);
-            resetForm();
-            setMessage('Book added successfully.');
 
-            setAlertVariant("success");
+        if (
+            title.trim() === '' ||
+            author.trim() === '' ||
+            genre.trim() === '' ||
+            description.trim() === '' ||
+            datePurchased.trim() === '' ||
+            dateFinishedReading.trim() === '' ||
+            format === ''
+        ) {
+            setMessage('Please fill out all required fields.');
+            setAlertVariant('danger');
             scrollToTop();
+        } else {
+            try {
+                const {data, error} = await supabase
+                    .from("readbooks")
+                    .insert({
+                        title,
+                        author,
+                        genre,
+                        description,
+                        date_purchased: datePurchased,
+                        date_finished_reading: dateFinishedReading,
+                        format_options: format,
+                        personal_notes: personalNotes
+                    })
+                    .single();
+                if (error) throw error;
+                setInsertSuccess(true);
+                resetForm();
+                setMessage('Book added successfully.');
 
-            setTimeout(() => {
-                setInsertSuccess(false);
-            }, 3000);
-        } catch (error) {
-            console.log("This is the error:" + error.message);
-            setMessage('An error occurred while adding the book.');
-            setAlertVariant("danger");
-            scrollToTop();
-            console.error('Error:', error);
+                setAlertVariant("success");
+                scrollToTop();
+
+                setTimeout(() => {
+                    setInsertSuccess(false);
+                }, 3000);
+            } catch (error) {
+                console.log("This is the error:" + error.message);
+                setMessage('An error occurred while adding the book.');
+                setAlertVariant("danger");
+                scrollToTop();
+                console.error('Error:', error);
+            }
         }
     };
 
