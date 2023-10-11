@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './navBar'; // Make sure to import your NavBar component
 import CreateBook from './createBook';
+import ReadBook from "./readBook";
 function App() {
     return (
         <Router>
@@ -9,7 +10,9 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route path="/create" element={<CreateBook />} />
-                    {/* Add more routes as needed */}
+                    <Route path="/read" element={<ReadBook />} />
+                    <Route path="/edit" element={<ReadBook />} />
+                    <Route path="*" element={<Navigate to="/read" />} />
                 </Routes>
             </div>
         </Router>
