@@ -12,6 +12,7 @@ function ProtectedRoute({ element }) {
         supabase.auth.getSession().then(({ data: { session } }) => {
             console.log('Session data:', session);
             setSession(session);
+            setLoading(false);
         });
 
         supabase.auth.onAuthStateChange((_event, session) => {
@@ -21,7 +22,15 @@ function ProtectedRoute({ element }) {
         });
     }, []);
 
-    return session ? element : <Navigate to="/login" />;
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (session) {
+        return element;
+    } else {
+        return <Navigate to="/login" />;
+    }
 }
 
 export default ProtectedRoute;
