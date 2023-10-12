@@ -16,7 +16,7 @@ function CreateBook() {
 
     const [insertSuccess, setInsertSuccess] = useState(false);
     const [message, setMessage] = useState('');
-    const [alertVariant, setAlertVariant] = useState("success"); // Default to success
+    const [alertVariant, setAlertVariant] = useState("success");
 
     const scrollToTop = () => {
         window.scrollTo(0, 0);
