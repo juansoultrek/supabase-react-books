@@ -4,6 +4,8 @@ import { supabase } from './supabaseClient';
 function LoginForm() {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [alertVariant, setAlertVariant] = useState('success');
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -14,14 +16,16 @@ function LoginForm() {
             options: {
                 shouldCreateUser: false
             }
-        })
-
+        });
 
         if (error) {
-            alert(error.error_description || error.message);
+            setMessage("Only valid users.");
+            setAlertVariant("danger");
         } else {
-            alert('Check your email for the login link!');
+            setMessage('Check your email for the login link!');
+            setAlertVariant('success');
         }
+
         setLoading(false);
     }
 
@@ -31,7 +35,12 @@ function LoginForm() {
                 <div className="card">
                     <div className="card-body">
                         <h1 className="card-title">Login</h1>
-                        <p className="card-text">Sign in via magic link with your email below</p>
+                        {message && (
+                            <div className={`alert alert-${alertVariant}`} role="alert">
+                                {message}
+                            </div>
+                        )}
+                        <p className="card-text">Sign in via a magic link with your email below</p>
                         <form onSubmit={handleLogin}>
                             <div className="form-group">
                                 <input
