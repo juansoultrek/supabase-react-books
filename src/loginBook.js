@@ -9,7 +9,13 @@ function LoginForm() {
         event.preventDefault();
 
         setLoading(true);
-        const { error } = await supabase.auth.signInWithOtp({ email });
+        const { data, error } = await supabase.auth.signInWithOtp({
+            email: email,
+            options: {
+                shouldCreateUser: false
+            }
+        })
+
 
         if (error) {
             alert(error.error_description || error.message);
