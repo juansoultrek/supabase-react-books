@@ -12,8 +12,10 @@ function EditBook() {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            // eslint-disable-next-line no-unused-vars
-            const { data, error } = await supabase.from('readbooks').select('*');
+
+            const {
+                // eslint-disable-next-line no-unused-vars
+                data, error } = await supabase.from('readbooks').select('*');
             if (error) {
                 console.error('Error fetching books:', error);
             } else {

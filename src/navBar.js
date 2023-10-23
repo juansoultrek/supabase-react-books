@@ -23,7 +23,7 @@ function NavBar() {
 
     const handleLogout = async () => {
 
-        const { error } = await supabase.auth.signOut();
+        const {} = await supabase.auth.signOut();
         window.location.reload();
         navigate("read");
     }
