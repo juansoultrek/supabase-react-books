@@ -52,6 +52,8 @@ function CreateBook() {
         } else {
             try {
                 const {data, error} = await supabase
+                    // eslint-disable-next-line no-unused-vars
+
                     .from("readbooks")
                     .insert({
                         title,

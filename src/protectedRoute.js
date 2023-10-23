@@ -5,7 +5,6 @@ import { supabase } from './supabaseClient';
 function ProtectedRoute({ element }) {
     const [session, setSession] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
