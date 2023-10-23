@@ -51,9 +51,7 @@ function CreateBook() {
             scrollToTop();
         } else {
             try {
-                const {data, error} = await supabase
-                    // eslint-disable-next-line no-unused-vars
-
+                const {error} = await supabase
                     .from("readbooks")
                     .insert({
                         title,
