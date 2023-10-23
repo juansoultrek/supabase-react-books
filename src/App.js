@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import NavBar from './navBar';
 import CreateBook from './createBook';
 import ReadBook from './readBook';
 import EditBook from './editBook';
 import LoginBook from './loginBook';
-import ProtectedRoute from './protectedRoute';  // Assuming you have a ProtectedRoute component
+import ProtectedRoute from './protectedRoute';
 
 function App() {
     return (
