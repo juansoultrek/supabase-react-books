@@ -3,7 +3,7 @@ name: cPanel Deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -26,9 +26,10 @@ jobs:
       - name: Upload to cPanel 📂
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.GITHUB_ACTIONS_CPANEL_FTP_SERVER }}
+          username: ${{ secrets.GITHUB_ACTIONS_CPANEL_FTP_USERNAME }}
+          password: ${{ secrets.GITHUB_ACTIONS_CPANEL_FTP_PASSWORD }}
+          protocol: ${{ secrets.GITHUB_ACTIONS_CPANEL_PROTOCOL }}
           server-dir: /public_html/
           exclude: |
             **/.git**
