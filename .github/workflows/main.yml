@@ -29,7 +29,6 @@ jobs:
           server: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }}
           username: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }}
           password: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }}
-          protocol: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_PROTOCOL }}
           server-dir: /public_html/
           exclude: |
             **/.git**
