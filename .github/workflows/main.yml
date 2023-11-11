@@ -26,10 +26,10 @@ jobs:
       - name: Upload to cPanel 📂
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.GITHUB_ACTIONS_CPANEL_FTP_SERVER }}
-          username: ${{ secrets.GITHUB_ACTIONS_CPANEL_FTP_USERNAME }}
-          password: ${{ secrets.GITHUB_ACTIONS_CPANEL_FTP_PASSWORD }}
-          protocol: ${{ secrets.GITHUB_ACTIONS_CPANEL_PROTOCOL }}
+          server: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }}
+          username: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }}
+          password: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }}
+          protocol: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_PROTOCOL }}
           server-dir: /public_html/
           exclude: |
             **/.git**
