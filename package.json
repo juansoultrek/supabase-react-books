@@ -2,6 +2,7 @@
   "name": "supabase-react-personal-books-read-library",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://juansoultrek.com/books/",
   "dependencies": {
     "@supabase/supabase-js": "^2.38.0",
     "@testing-library/jest-dom": "^5.17.0",
