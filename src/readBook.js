@@ -3,6 +3,8 @@ import { Container, Row, Col, Table } from 'react-bootstrap';
 import { supabase } from './supabaseClient';
 
 function ReadBook() {
+    console.log('api_url-->' +process.env.REACT_APP_SUPABASE_CLIENT_URL);
+
     const [books, setBooks] = useState([]);
 
     useEffect(() => {

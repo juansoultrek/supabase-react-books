@@ -2,7 +2,7 @@
   "name": "supabase-react-personal-books-read-library",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://juansoultrek.com/books/",
+  "homepage": "/books",
   "dependencies": {
     "@supabase/supabase-js": "^2.38.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -17,7 +17,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --base-href /books",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

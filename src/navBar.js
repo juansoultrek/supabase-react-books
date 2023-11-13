@@ -22,45 +22,42 @@ function NavBar() {
     }, []);
 
     const handleLogout = async () => {
-
         await supabase.auth.signOut();
         window.location.reload();
-        navigate("read");
+        navigate("/books/read"); // Update the navigate path to include "/books"
     }
 
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Link to="/read" style={{ textDecoration: 'none' }}>
+                <Link to="/books/read" style={{ textDecoration: 'none' }}>
                     <Navbar.Brand>
                         My Read Books {user.email ? <span style={{ fontSize: '12px', color: 'blue' }}>{user.email}</span> : null}
                     </Navbar.Brand>
                 </Link>
 
-
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mx-auto">
-                        <Link to="/login" className={`nav-link ${user.email ? 'd-none' : ''}`}>
+                        <Link to="/books/login" className={`nav-link ${user.email ? 'd-none' : ''}`}>
                             Login
                         </Link>
                         {user.email && (
                             <>
-                                <Link to="/create" className="nav-link">
+                                <Link to="/books/create" className="nav-link">
                                     Add Book
                                 </Link>
-                                <Link to="/edit" className="nav-link">
+                                <Link to="/books/edit" className="nav-link">
                                     Edit Book
                                 </Link>
-
+                                <Link to="/books/read" className="nav-link">
+                                    Read Books
+                                </Link>
                                 <Link to="#" className="nav-link" onClick={handleLogout}>
                                     Log Out
                                 </Link>
                             </>
                         )}
-                        <Link to="/read" className="nav-link">
-                        </Link>
-
                     </Nav>
                     <Nav className="ml-auto">
                         <Nav.Item>Created by Juan</Nav.Item>
