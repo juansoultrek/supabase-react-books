@@ -12,11 +12,11 @@ function App() {
             <div>
                 <NavBar />
                 <Routes>
-                    <Route path="/create" element={<ProtectedRoute element={<CreateBook />} />} />
-                    <Route path="/read" element={<ReadBook />} />
-                    <Route path="/edit" element={<ProtectedRoute element={<EditBook />} />} />
-                    <Route path="/login" element={<LoginBook />} />
-                    <Route path="*" element={<Navigate to="/read" />} />
+                    <Route path="/books/create" element={<ProtectedRoute element={<CreateBook />} />} />
+                    <Route path="/books/read" element={<ReadBook />} />
+                    <Route path="/books/edit" element={<ProtectedRoute element={<EditBook />} />} />
+                    <Route path="/books/login" element={<LoginBook />} />
+                    <Route path="/books/*" element={<Navigate to="/books/read" />} />
                 </Routes>
             </div>
         </Router>
