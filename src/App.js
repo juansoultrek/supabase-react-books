@@ -5,8 +5,6 @@ import ReadBook from './readBook';
 import EditBook from './editBook';
 import LoginBook from './loginBook';
 import ProtectedRoute from './protectedRoute';
-import EnvVariablesDisplay from './EnvVariablesDisplay';
-
 
 function App() {
     return (
@@ -14,8 +12,6 @@ function App() {
             <div>
                 <NavBar />
                 <Routes>
-                    <Route path="/books/env" element={<EnvVariablesDisplay />}/>
-
                     <Route path="/books/create" element={<ProtectedRoute element={<CreateBook />} />} />
                     <Route path="/books/read" element={<ReadBook />} />
                     <Route path="/books/edit" element={<ProtectedRoute element={<EditBook />} />} />
