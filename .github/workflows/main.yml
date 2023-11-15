@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> .env.production
           echo "REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> .env.production
-          npx SamKirkland/FTP-Deploy-Action@v4.3.4
+          npx github:SamKirkland/FTP-Deploy-Action@v4.3.4
             server: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }}
             username: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }}
             password: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }}
