@@ -20,18 +20,13 @@ jobs:
       - name: Install Dependencies 📦
         run: npm install
 
+      - name: Set environment variables
+        run: |
+          echo "REACT_APP_SUPABASE_CLIENT_URL=${{ secrets.REACT_APP_SUPABASE_CLIENT_URL }}" >> $GITHUB_ENV
+          echo "REACT_APP_SUPABASE_PROJECT_KEY=${{ secrets.REACT_APP_SUPABASE_PROJECT_KEY }}" >> $GITHUB_ENV
+
       - name: Supabase - React Book 🏗️
         run: npm run build
-
-      - name: Create .env.production 📝
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_REACT_APP_SUPABASE_CLIENT_URL: ${{ secrets.REACT_APP_SUPABASE_CLIENT_URL }}
-          envkey_REACT_APP_SUPABASE_PROJECT_KEY: ${{ secrets.REACT_APP_SUPABASE_PROJECT_KEY }}
-          file_name: .env.production
-          directory: ./build/
-          fail_on_empty: false
-          sort_keys: false
 
       - name: Upload to cPanel 📂
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
