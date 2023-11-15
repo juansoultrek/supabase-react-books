@@ -1,13 +1,43 @@
-name: Check Secrets
+name: cPanel Deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  check-secrets:
+  deploy:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
     steps:
-      - name: Check Secrets
-        run: |
-          echo ${{ secrets.REACT_APP_SUPABASE_CLIENT_URL}}
-          echo ${{ secrets.REACT_APP_SUPABASE_PROJECT_KEY}}
+      - name: Checkout Code 🚚
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies 📦
+        run: npm install
+
+      - name: Supabase - React Book 🏗️
+        run: npm run build
+
+      - name: Create .env.production 📝
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_REACT_APP_SUPABASE_CLIENT_URL: ${{ secrets.REACT_APP_SUPABASE_CLIENT_URL }}
+          envkey_REACT_APP_SUPABASE_PROJECT_KEY: ${{ secrets.REACT_APP_SUPABASE_PROJECT_KEY }}
+          file_name: .env.production
+          directory: ./build/
+          fail_on_empty: false
+          sort_keys: false
+
+      - name: Upload to cPanel 📂
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }}
+          username: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }}
+          password: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }}
+          server-dir: /
+          local-dir: build/
