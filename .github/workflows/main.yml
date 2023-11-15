@@ -6,8 +6,13 @@ on:
       - main
 
 jobs:
-  create-envfile:
+  deploy:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
     steps:
       - name: Checkout Code 🚚
         uses: actions/checkout@v3
@@ -15,7 +20,7 @@ jobs:
       - name: Install Dependencies 📦
         run: npm install
 
-      - name: Supabase - React Book - Spiritual Quotes 🏗️
+      - name: Supabase - React Book 🏗️
         run: npm run build
 
       - name: Create .env.production 📝
@@ -29,4 +34,10 @@ jobs:
           sort_keys: false
 
       - name: Upload to cPanel 📂
-        run: npx github:SamKirkland/FTP-Deploy-Action@v4.3.4 --server ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }} --username ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }} --password ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }} --server-dir / --local-dir build/
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }}
+          username: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }}
+          password: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }}
+          server-dir: /
+          local-dir: build/
