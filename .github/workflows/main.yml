@@ -6,9 +6,8 @@ on:
       - main
 
 jobs:
-  deploy:
+  create-envfile:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code 🚚
         uses: actions/checkout@v3
@@ -20,12 +19,14 @@ jobs:
         run: npm run build
 
       - name: Create .env.production 📝
-        run: |
-          echo "REACT_APP_SUPABASE_CLIENT_URL=${{ secrets.REACT_APP_API_URL }}" >> .env.production
-          echo "REACT_APP_SUPABASE_PROJECT_KEY=${{ secrets.REACT_APP_API_KEY }}" >> .env.production
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_REACT_APP_SUPABASE_CLIENT_URL: ${{ secrets.REACT_APP_API_URL }}
+          envkey_REACT_APP_SUPABASE_PROJECT_KEY: ${{ secrets.REACT_APP_API_KEY }}
+          file_name: .env.production
+          directory: ./build/
+          fail_on_empty: false
+          sort_keys: false
 
       - name: Upload to cPanel 📂
-        env:
-          REACT_APP_SUPABASE_CLIENT_URL: ${{ secrets.REACT_APP_API_URL }}
-          REACT_APP_SUPABASE_PROJECT_KEY: ${{ secrets.REACT_APP_API_KEY }}
-        run: "npx github:SamKirkland/FTP-Deploy-Action@v4.3.4 --server ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }} --username ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }} --password ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }} --server-dir / --local-dir build/"
+        run: npx github:SamKirkland/FTP-Deploy-Action@v4.3.4 --server ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }} --username ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }} --password ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }} --server-dir / --local-dir build/
