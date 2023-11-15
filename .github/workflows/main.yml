@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Check Secrets
         run: |
-          echo ${{ secrets.REACT_APP_API_URL }}
-          echo ${{ secrets.REACT_APP_API_KEY }}
+          echo ${{ secrets.REACT_APP_SUPABASE_CLIENT_URL}}
+          echo ${{ secrets.REACT_APP_SUPABASE_PROJECT_KEY}}
