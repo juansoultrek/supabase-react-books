@@ -34,3 +34,6 @@ jobs:
         env:
           REACT_APP_SUPABASE_CLIENT_URL: ${{ secrets.REACT_APP_API_URL }}
           REACT_APP_SUPABASE_PROJECT_KEY: ${{ secrets.REACT_APP_API_KEY }}
+        run: |
+          echo "REACT_APP_API_URL=${REACT_APP_API_URL}" >> .env.production
+          echo "REACT_APP_API_KEY=${REACT_APP_API_KEY}" >> .env.production
