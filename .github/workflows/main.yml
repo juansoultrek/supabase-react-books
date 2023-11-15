@@ -13,15 +13,21 @@ jobs:
       - name: Checkout Code 🚚
         uses: actions/checkout@v3
 
+      - name: Create .env.production 📝
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_REACT_APP_SUPABASE_CLIENT_URL: ${{ secrets.REACT_APP_API_URL }}
+          envkey_REACT_APP_SUPABASE_PROJECT_KEY: ${{ secrets.REACT_APP_API_KEY }}
+          file_name: .env.production
+          directory: ./build/
+          fail_on_empty: false
+          sort_keys: false
+
       - name: Install Dependencies 📦
         run: npm install
 
-      - name: Supabase - React Book - Spiritual Quotes 🏗️
+      - name: Supabase - React Book 🏗️
         run: npm run build
-
-      - name: Create .env.production 📝
-        run: |
-          npx create-envfile@v2.0 envkey_REACT_APP_SUPABASE_CLIENT_URL=${{ secrets.REACT_APP_API_URL }} envkey_REACT_APP_SUPABASE_PROJECT_KEY=${{ secrets.REACT_APP_API_KEY }} file_name=.env.production directory=./build/
 
       - name: Upload to cPanel 📂
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
