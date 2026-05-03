@@ -57,8 +57,10 @@ Required GitHub Actions secrets:
 - `GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER`
 - `GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME`
 - `GIT_ACTIONS_CPANEL_REACT_BOOKS_SSH_PRIVATE_KEY`
+- `GIT_ACTIONS_CPANEL_REACT_BOOKS_SSH_PORT` — SSH/SFTP port used for deploy.
+- `GIT_ACTIONS_CPANEL_REACT_BOOKS_REMOTE_DIR` — server directory where the `build/` files are uploaded (not committed in the repo).
 
-The deploy step uses SFTP/SCP on port `21098`.
+The deploy step uploads `build/*` to that directory over SCP.
 
 ## Notes
 

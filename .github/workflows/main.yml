@@ -31,8 +31,8 @@ jobs:
           host: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }}
           username: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }}
           key: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_SSH_PRIVATE_KEY }}
-          port: 21098
+          port: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_SSH_PORT }}
           source: "build/*"
-          target: "public_html/juansoultrek.com/books"
+          target: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_REMOTE_DIR }}
           strip_components: 1
           overwrite: true
