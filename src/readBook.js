@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import { supabase } from './supabaseClient';
+import './readBook.css';
 
 function ReadBook() {
     console.log('api_url-->' +process.env.REACT_APP_SUPABASE_CLIENT_URL);
@@ -22,41 +23,49 @@ function ReadBook() {
     }, []);
 
     return (
-        <Container>
-            <Row>
-                <Col xs={12} md={8}>
-                    <h3>Read Books</h3>
+        <Container className="read-books-container">
+            <Row className="justify-content-center">
+                <Col xs={12} lg={11} xl={10}>
+                    <div className="books-header">
+                        <h2 className="books-title">📚 My Reading Library</h2>
+                        <p className="books-subtitle">A collection of books I've read and loved</p>
+                    </div>
+                    
                     {books.length === 0 ? (
-                        <p>No books to display.</p>
+                        <div className="no-books-message">
+                            <p>No books to display yet. Start adding your reading journey!</p>
+                        </div>
                     ) : (
-                        <Table striped bordered hover style={{ width: '100%' }}>
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Genre</th>
-                                <th>Description</th>
-                                <th>Date Purchased</th>
-                                <th>Date Finished Reading</th>
-                                <th>Format Options</th>
-                                <th>Personal Notes</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {books.map((book) => (
-                                <tr key={book.id}>
-                                    <td>{book.title}</td>
-                                    <td>{book.author}</td>
-                                    <td>{book.genre}</td>
-                                    <td>{book.description}</td>
-                                    <td>{book.date_purchased}</td>
-                                    <td>{book.date_finished_reading}</td>
-                                    <td>{book.format_options}</td>
-                                    <td>{book.personal_notes}</td>
+                        <div className="table-wrapper">
+                            <Table hover className="modern-table">
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Genre</th>
+                                    <th>Description</th>
+                                    <th>Purchased</th>
+                                    <th>Finished</th>
+                                    <th>Format</th>
+                                    <th>Notes</th>
                                 </tr>
-                            ))}
-                            </tbody>
-                        </Table>
+                                </thead>
+                                <tbody>
+                                {books.map((book) => (
+                                    <tr key={book.id}>
+                                        <td className="book-title">{book.title}</td>
+                                        <td>{book.author}</td>
+                                        <td><span className="genre-badge">{book.genre}</span></td>
+                                        <td className="description">{book.description}</td>
+                                        <td>{book.date_purchased}</td>
+                                        <td>{book.date_finished_reading}</td>
+                                        <td><span className="format-badge">{book.format_options}</span></td>
+                                        <td className="notes">{book.personal_notes}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </Table>
+                        </div>
                     )}
                 </Col>
             </Row>
