@@ -30,7 +30,7 @@ jobs:
         with:
           host: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_SERVER }}
           username: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_USERNAME }}
-          password: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_FTP_PASSWORD }}
+          key: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_SSH_PRIVATE_KEY }}
           port: 21098
           source: "build/*"
           target: "/"
