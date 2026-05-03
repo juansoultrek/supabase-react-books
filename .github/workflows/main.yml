@@ -33,6 +33,6 @@ jobs:
           key: ${{ secrets.GIT_ACTIONS_CPANEL_REACT_BOOKS_SSH_PRIVATE_KEY }}
           port: 21098
           source: "build/*"
-          target: "/"
+          target: "public_html/juansoultrek.com/books"
           strip_components: 1
           overwrite: true
