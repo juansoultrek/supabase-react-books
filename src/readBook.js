@@ -29,6 +29,7 @@ function ReadBook() {
                     <div className="books-header">
                         <h2 className="books-title">📚 My Reading Library</h2>
                         <p className="books-subtitle">A collection of books I've read and loved</p>
+                        <a className="home-link-button" href="/">Back to home</a>
                     </div>
                     
                     {books.length === 0 ? (

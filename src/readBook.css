@@ -24,6 +24,26 @@
     font-weight: 300;
 }
 
+.home-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #2c3e50;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.home-link-button:hover {
+    background: #3498db;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
 .table-wrapper {
     background: white;
     border-radius: 10px;
