@@ -43,7 +43,9 @@ The production build is written to `build/`.
 
 ## Deployment
 
-Deployment runs through GitHub Actions in `.github/workflows/main.yml`.
+> **Author deploy only.** [`.github/workflows/main.yml`](.github/workflows/main.yml) is wired for the author’s cPanel/SFTP host. If you clone this repo to run it locally, **ignore or delete** `.github/workflows/` — you do not need it. Without the author’s secrets, Actions will **not** deploy to their server.
+
+Deployment runs through that workflow.
 
 The workflow runs on:
 
